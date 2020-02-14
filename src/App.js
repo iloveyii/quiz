@@ -4,6 +4,11 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
+import Switch from '@material-ui/core/Switch';
+import Paper from '@material-ui/core/Paper';
+import Slide from '@material-ui/core/Slider';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+
 import './App.css';
 
 
@@ -30,6 +35,20 @@ const styles = theme => ({
         marginTop: theme.spacing(8),
         marginBottom: theme.spacing(2),
     },
+    paper: {
+        zIndex: 1,
+        position: 'relative',
+        margin: theme.spacing(1),
+    },
+    svg: {
+        width: 100,
+        height: 100,
+    },
+    polygon: {
+        fill: theme.palette.common.white,
+        stroke: theme.palette.divider,
+        strokeWidth: 1,
+    },
     footer: {
         padding: theme.spacing(3, 2),
         marginTop: 'auto',
@@ -41,8 +60,18 @@ const styles = theme => ({
 
 class App extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {checked: false};
+    }
+
+    handleChange = () => {
+        this.setState({checked : !this.state.checked});
+    };
+
     render() {
         const {classes} = this.props;
+        const {checked} = this.state;
 
         return (
             <div className={classes.root}>
@@ -56,6 +85,20 @@ class App extends React.Component {
                         {'The footer will move as the main element of the page grows.'}
                     </Typography>
                     <Typography variant="body1">Sticky footer placeholder.</Typography>
+
+                    <FormControlLabel
+                        control={<Switch checked={checked} onChange={this.handleChange} />}
+                        label="Show"
+                    />
+
+                    <Slide direction="up" in={checked + ''} mountOnEnter unmountOnExit>
+                        <Paper elevation={14} className={classes.paper}>
+                            <svg className={classes.svg}>
+                                <polygon points="0,100 50,00, 100,100" className={classes.polygon} />
+                            </svg>
+                        </Paper>
+                    </Slide>
+
                 </Container>
                 <footer className={classes.footer}>
                     <Container maxWidth="sm">
