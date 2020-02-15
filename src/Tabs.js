@@ -8,6 +8,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import questions from './mocks';
+import RadioGroup from './RadioGroup';
 
 function TabPanel(props) {
     const {children, value, index, ...other} = props;
@@ -85,7 +86,7 @@ export default function FullWidthTabs() {
             >
                 {
                     questions.map(q => <TabPanel key={q.id} value={value} index={q.id}
-                                                 dir={theme.direction}> {q.description} </TabPanel>)
+                                                 dir={theme.direction}> <RadioGroup description={q.description} /> </TabPanel>)
                 }
             </SwipeableViews>
         </div>

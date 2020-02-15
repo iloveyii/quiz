@@ -65,49 +65,10 @@ class App extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {checked: false};
     }
-
-    handleChange = () => {
-        this.setState({checked: !this.state.checked});
-    };
 
     render() {
         const {classes} = this.props;
-        const {checked} = this.state;
-
-        let config = {
-            num: [4, 7],
-            rps: 0.1,
-            radius: [5, 40],
-            life: [1.5, 3],
-            v: [2, 3],
-            tha: [-40, 40],
-            alpha: [0.6, 0],
-            scale: [.1, 0.4],
-            position: "all",
-            color: ["random", "#ff0000"],
-            cross: "dead",
-            // emitter: "follow",
-            random: 15
-        };
-
-        if (Math.random() > 0.85) {
-            config = Object.assign(config, {
-                onParticleUpdate: (ctx, particle) => {
-                    ctx.beginPath();
-                    ctx.rect(
-                        particle.p.x,
-                        particle.p.y,
-                        particle.radius * 2,
-                        particle.radius * 2
-                    );
-                    ctx.fillStyle = particle.color;
-                    ctx.fill();
-                    ctx.closePath();
-                }
-            });
-        }
 
         return (
             <div className={classes.root}>
@@ -118,8 +79,7 @@ class App extends React.Component {
                         Questions pool
                     </Typography>
                     <Typography variant="h5" component="h2" gutterBottom>
-                        {'Pin a footer to the bottom of the viewport.'}
-                        {'The footer will move as the main element of the page grows.'}
+                        {'For each questions four alternative options have been given'}
                     </Typography>
                     <Typography variant="body1">Sticky footer placeholder.</Typography>
 
