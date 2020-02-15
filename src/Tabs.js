@@ -57,10 +57,13 @@ export default function FullWidthTabs() {
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
+        console.log('You changed index to ', newValue);
     };
 
     const handleChangeIndex = index => {
-        setValue(index);
+        if(index >=0 && index < 10)
+            setValue(index);
+        console.log('You handleChangeIndex index to ', index);
     };
 
     return (
@@ -75,7 +78,7 @@ export default function FullWidthTabs() {
                     aria-label="full width tabs"
                 >
                     {
-                        questions.map(q => <Tab key={q.id} label={q.id} {...a11yProps(q.id)}  />)
+                        questions.map(q => <Tab key={q.id} label={q.id + 1} {...a11yProps(q.id)}  />)
                     }
                 </Tabs>
             </AppBar>
@@ -86,7 +89,7 @@ export default function FullWidthTabs() {
             >
                 {
                     questions.map(q => <TabPanel key={q.id} value={value} index={q.id}
-                                                 dir={theme.direction}> <RadioGroup description={q.description} /> </TabPanel>)
+                                                 dir={theme.direction}> <RadioGroup prev={()=>handleChangeIndex(q.id - 1)} next={() => handleChangeIndex(q.id+1)} q={q} description={q.description} /> </TabPanel>)
                 }
             </SwipeableViews>
         </div>

@@ -6,6 +6,8 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import Button from '@material-ui/core/Button';
+
 
 const useStyles = makeStyles({
     root: {
@@ -68,12 +70,16 @@ export default function CustomizedRadios(props) {
     return (
         <FormControl component="fieldset">
             <FormLabel style={{marginBottom: '20px'}} component="legend">{props.description}</FormLabel>
-            <RadioGroup defaultValue="female" aria-label="gender" name="customized-radios">
-                <FormControlLabel value="female" control={<StyledRadio />} label="Female" />
-                <FormControlLabel value="male" control={<StyledRadio />} label="Male" />
-                <FormControlLabel value="other" control={<StyledRadio />} label="Other" />
-                <FormControlLabel value="option4" control={<StyledRadio />} label="Four" />
+            <RadioGroup defaultValue={false} aria-label="gender" name={props.q.id+'_name'}>
+                { props.q.choices.map(( (choice, index) => <FormControlLabel value={index} control={<StyledRadio />} label={choice} />))}
             </RadioGroup>
+
+            <Button onClick={props.prev} style={{marginTop: '30px'}} variant="contained" color="success">
+                Previous
+            </Button>
+            <Button onClick={props.next} style={{marginTop: '30px'}} variant="contained" color="primary">
+                Next
+            </Button>
         </FormControl>
     );
 }
