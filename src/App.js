@@ -1,13 +1,16 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import Switch from '@material-ui/core/Switch';
 import Paper from '@material-ui/core/Paper';
 import Slide from '@material-ui/core/Slider';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import ParticlesBg from "particles-bg";
+import FullWidthTabs from "./Tabs";
+
 
 import './App.css';
 
@@ -66,19 +69,53 @@ class App extends React.Component {
     }
 
     handleChange = () => {
-        this.setState({checked : !this.state.checked});
+        this.setState({checked: !this.state.checked});
     };
 
     render() {
         const {classes} = this.props;
         const {checked} = this.state;
 
+        let config = {
+            num: [4, 7],
+            rps: 0.1,
+            radius: [5, 40],
+            life: [1.5, 3],
+            v: [2, 3],
+            tha: [-40, 40],
+            alpha: [0.6, 0],
+            scale: [.1, 0.4],
+            position: "all",
+            color: ["random", "#ff0000"],
+            cross: "dead",
+            // emitter: "follow",
+            random: 15
+        };
+
+        if (Math.random() > 0.85) {
+            config = Object.assign(config, {
+                onParticleUpdate: (ctx, particle) => {
+                    ctx.beginPath();
+                    ctx.rect(
+                        particle.p.x,
+                        particle.p.y,
+                        particle.radius * 2,
+                        particle.radius * 2
+                    );
+                    ctx.fillStyle = particle.color;
+                    ctx.fill();
+                    ctx.closePath();
+                }
+            });
+        }
+
         return (
             <div className={classes.root}>
                 <CssBaseline/>
-                <Container component="main" className={classes.main} maxWidth="sm">
+
+                <Container component="main" className={classes.main} maxWidth="xl">
                     <Typography variant="h2" component="h1" gutterBottom>
-                        Sticky footer
+                        Questions pool
                     </Typography>
                     <Typography variant="h5" component="h2" gutterBottom>
                         {'Pin a footer to the bottom of the viewport.'}
@@ -86,26 +123,18 @@ class App extends React.Component {
                     </Typography>
                     <Typography variant="body1">Sticky footer placeholder.</Typography>
 
-                    <FormControlLabel
-                        control={<Switch checked={checked} onChange={this.handleChange} />}
-                        label="Show"
-                    />
-
-                    <Slide direction="up" in={checked + ''} mountOnEnter unmountOnExit>
-                        <Paper elevation={14} className={classes.paper}>
-                            <svg className={classes.svg}>
-                                <polygon points="0,100 50,00, 100,100" className={classes.polygon} />
-                            </svg>
-                        </Paper>
-                    </Slide>
-
+                    <FullWidthTabs />
                 </Container>
+
                 <footer className={classes.footer}>
                     <Container maxWidth="sm">
                         <Typography variant="body1">My sticky footer can be found here.</Typography>
                         <Copyright/>
                     </Container>
                 </footer>
+
+                <ParticlesBg type="random" bg={true}/>
+
             </div>
         );
     }
