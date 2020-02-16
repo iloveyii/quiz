@@ -7,8 +7,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import questions from '../mocks';
-import RadioGroup from './RadioGroup';
+import Question from './Question';
+import Result from './Result';
 
 function TabPanel(props) {
     const {children, value, index, ...other} = props;
@@ -50,34 +50,52 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function FullWidthTabs() {
+export default function QuestionsTabs(props) {
     const classes = useStyles();
     const theme = useTheme();
-    const [value, setValue] = React.useState(0);
-    const [answers, setAnswers] = React.useState([]);
+    const [questionId, setQuestionId] = React.useState(0);
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-        console.log('You changed index to ', newValue);
+    const handleChange = (event, newQuestionId) => {
+        setQuestionId(newQuestionId);
+        console.log('You changed index to ', newQuestionId);
     };
+    console.log('FUNC QuestionsTabs CALLED', props.questions);
 
     const handleChangeIndex = index => {
-        if(index >=0 && index < 10)
-            setValue(index);
-        else
+        if(index >=0 && index < 10) {
+            setQuestionId(index);
+        }
+        else {
             calculateResults();
+            setQuestionId(index);
+        }
         console.log('You handleChangeIndex index to ', index);
     };
 
     const calculateResults = () => {
-        console.log('Results: ', questions)
+        console.log('Results: ', props.questions);
+        let correct = 0; let wrong = 0;
+        for(let i = 0; i < props.questions.length; i++) {
+            const q = props.questions[i];
+            if(q.answer == q.correct) {
+                correct++;
+            } else {
+                wrong++;
+                console.log(q.correct, q.answer)
+            }
+        }
+        console.log('Correct, wrong', correct, wrong);
     };
+
+    if(questionId > 9) {
+        return <Result questions={props.questions}></Result>
+    }
 
     return (
         <div className={classes.root}>
             <AppBar position="static" color="default">
                 <Tabs
-                    value={value}
+                    value={questionId}
                     onChange={handleChange}
                     indicatorColor="primary"
                     textColor="primary"
@@ -85,18 +103,20 @@ export default function FullWidthTabs() {
                     aria-label="full width tabs"
                 >
                     {
-                        questions.map(q => <Tab key={q.id} label={q.id + 1} {...a11yProps(q.id)}  />)
+                        props.questions.map(q => <Tab key={q.id} label={q.id + 1} {...a11yProps(q.id)}  />)
                     }
                 </Tabs>
             </AppBar>
             <SwipeableViews
                 axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-                index={value}
+                index={questionId}
                 onChangeIndex={handleChangeIndex}
             >
                 {
-                    questions.map(q => <TabPanel key={q.id} value={value} index={q.id}
-                                                 dir={theme.direction}> <RadioGroup key={q.id} prev={()=>handleChangeIndex(q.id - 1)} next={() => handleChangeIndex(q.id+1)} q={q} /> </TabPanel>)
+                    props.questions.map(q => <TabPanel key={q.id} value={questionId} index={q.id}
+                                                 dir={theme.direction}>
+                        <Question key={q.id} prev={()=>handleChangeIndex(q.id - 1)} next={() => handleChangeIndex(q.id+1)} q={q} />
+                        </TabPanel>)
                 }
             </SwipeableViews>
         </div>

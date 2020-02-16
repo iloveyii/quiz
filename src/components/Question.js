@@ -8,6 +8,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
+import Result from './Result';
 
 
 const useStyles = makeStyles({
@@ -51,7 +52,6 @@ const useStyles = makeStyles({
     },
 });
 
-// Inspired by blueprintjs
 function StyledRadio(props) {
     const classes = useStyles();
 
@@ -67,23 +67,27 @@ function StyledRadio(props) {
     );
 }
 
-export default function CustomizedRadios(props) {
+export default function Question(props) {
+                console.log('Question props', props);
     return (
         <FormControl component="fieldset" style={{width: '100%'}}>
             <FormLabel style={{marginBottom: '20px', textAlign: 'left'}}
                        component="legend"><strong>{props.q.id + 1} : </strong>{props.q.description}</FormLabel>
-            <RadioGroup defaultValue={0} aria-label="gender" name={props.q.id + '_name'}>
+            <RadioGroup defaultValue={props.q.answer + ''} aria-label="gender"
+                        name={props.q.id + '_name'}>
                 {props.q.choices.map(((choice, index) => <FormControlLabel key={index} value={index + ''}
                                                                            control={<StyledRadio
-                                                                               onChange={() => console.log(props.q['answer'] = index)}/>}
+                                                                               onChange={() => props.q.setAnswer(index)}/>}
                                                                            label={choice}/>))}
             </RadioGroup>
 
             <Toolbar style={{float: 'right', display: 'block'}}>
-                <Button onClick={props.prev} style={{margin: '30px 10px 0 0', minWidth: '120px'}} variant="contained" color="secondary">
+                <Button onClick={props.prev} style={{margin: '30px 10px 0 0', minWidth: '120px'}} variant="contained"
+                        color="secondary">
                     Previous
                 </Button>
-                <Button onClick={props.next} style={{marginTop: '30px', minWidth: '120px'}} variant="contained" color="primary">
+                <Button onClick={props.next} style={{marginTop: '30px', minWidth: '120px'}} variant="contained"
+                        color="primary">
                     {props.q.id < 9 ? 'Next' : 'Submit'}
                 </Button>
             </Toolbar>

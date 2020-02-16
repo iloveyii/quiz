@@ -6,8 +6,10 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import ParticlesBg from "particles-bg";
-import FullWidthTabs from "./Tabs";
+import QuestionsTabs from "./QuestionsTabs";
 import Copyright from './Copyright';
+import mcqs from '../mocks';
+import Model from './Model';
 
 import '../App.css';
 
@@ -60,6 +62,15 @@ class App extends React.Component {
 
     constructor(props) {
         super(props);
+        console.log('App');
+        this.setQuestionId = this.setQuestionId.bind(this);
+        const questions = [];
+        mcqs.map( mcq => questions.push(new Model(mcq)));
+        this.state = {questions: questions, questionId: 0};
+    }
+
+    setQuestionId(id) {
+        this.setState({questionId: id});
     }
 
     render() {
@@ -68,7 +79,6 @@ class App extends React.Component {
         return (
             <div className={classes.root}>
                 <CssBaseline/>
-
 
                 <Container component="main" className={classes.main} maxWidth="xl">
                     <Typography variant="h2" component="h1" gutterBottom>
@@ -80,11 +90,10 @@ class App extends React.Component {
                     <Typography variant="body1">You can move back and forth using the buttons previous and
                         next.</Typography>
 
-
                     <Grid container spacing={3} className={classes.grid}>
                         <Grid item xs={12} sm={6}>
                             <Paper className={classes.paper}>
-                                <FullWidthTabs/>
+                                <QuestionsTabs questions={this.state.questions} />
                             </Paper>
                         </Grid>
                     </Grid>
