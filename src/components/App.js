@@ -3,45 +3,40 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import {withStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
-import Switch from '@material-ui/core/Switch';
+import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Slide from '@material-ui/core/Slider';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import ParticlesBg from "particles-bg";
 import FullWidthTabs from "./Tabs";
+import Copyright from './Copyright';
 
+import '../App.css';
 
-import './App.css';
-
-
-function Copyright() {
-    return (
-        <Typography variant="body2" color="textSecondary">
-            {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-                Your Website
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
 
 const styles = theme => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     main: {
         marginTop: theme.spacing(8),
         marginBottom: theme.spacing(2),
+        textAlign: 'center',
+
+    },
+    grid: {
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     paper: {
-        zIndex: 1,
+        zIndex: 0,
         position: 'relative',
         margin: theme.spacing(1),
+        padding: theme.spacing(2),
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
     },
     svg: {
         width: 100,
@@ -74,6 +69,7 @@ class App extends React.Component {
             <div className={classes.root}>
                 <CssBaseline/>
 
+
                 <Container component="main" className={classes.main} maxWidth="xl">
                     <Typography variant="h2" component="h1" gutterBottom>
                         Questions pool
@@ -81,14 +77,23 @@ class App extends React.Component {
                     <Typography variant="h5" component="h2" gutterBottom>
                         {'For each questions four alternative options have been given'}
                     </Typography>
-                    <Typography variant="body1">Sticky footer placeholder.</Typography>
+                    <Typography variant="body1">You can move back and forth using the buttons previous and
+                        next.</Typography>
 
-                    <FullWidthTabs />
+
+                    <Grid container spacing={3} className={classes.grid}>
+                        <Grid item xs={12} sm={6}>
+                            <Paper className={classes.paper}>
+                                <FullWidthTabs/>
+                            </Paper>
+                        </Grid>
+                    </Grid>
+
                 </Container>
 
                 <footer className={classes.footer}>
                     <Container maxWidth="sm">
-                        <Typography variant="body1">My sticky footer can be found here.</Typography>
+                        <Typography variant="body1">This a test Quiz app developed in React.</Typography>
                         <Copyright/>
                     </Container>
                 </footer>

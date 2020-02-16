@@ -7,7 +7,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import questions from './mocks';
+import questions from '../mocks';
 import RadioGroup from './RadioGroup';
 
 function TabPanel(props) {
@@ -54,6 +54,7 @@ export default function FullWidthTabs() {
     const classes = useStyles();
     const theme = useTheme();
     const [value, setValue] = React.useState(0);
+    const [answers, setAnswers] = React.useState([]);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -63,7 +64,13 @@ export default function FullWidthTabs() {
     const handleChangeIndex = index => {
         if(index >=0 && index < 10)
             setValue(index);
+        else
+            calculateResults();
         console.log('You handleChangeIndex index to ', index);
+    };
+
+    const calculateResults = () => {
+        console.log('Results: ', questions)
     };
 
     return (
@@ -89,7 +96,7 @@ export default function FullWidthTabs() {
             >
                 {
                     questions.map(q => <TabPanel key={q.id} value={value} index={q.id}
-                                                 dir={theme.direction}> <RadioGroup prev={()=>handleChangeIndex(q.id - 1)} next={() => handleChangeIndex(q.id+1)} q={q} description={q.description} /> </TabPanel>)
+                                                 dir={theme.direction}> <RadioGroup key={q.id} prev={()=>handleChangeIndex(q.id - 1)} next={() => handleChangeIndex(q.id+1)} q={q} /> </TabPanel>)
                 }
             </SwipeableViews>
         </div>

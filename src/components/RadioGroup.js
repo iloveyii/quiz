@@ -1,12 +1,13 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
+import Toolbar from '@material-ui/core/Toolbar';
 
 
 const useStyles = makeStyles({
@@ -59,8 +60,8 @@ function StyledRadio(props) {
             className={classes.root}
             disableRipple
             color="default"
-            checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)} />}
-            icon={<span className={classes.icon} />}
+            checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)}/>}
+            icon={<span className={classes.icon}/>}
             {...props}
         />
     );
@@ -68,18 +69,25 @@ function StyledRadio(props) {
 
 export default function CustomizedRadios(props) {
     return (
-        <FormControl component="fieldset">
-            <FormLabel style={{marginBottom: '20px'}} component="legend">{props.description}</FormLabel>
-            <RadioGroup defaultValue={false} aria-label="gender" name={props.q.id+'_name'}>
-                { props.q.choices.map(( (choice, index) => <FormControlLabel value={index} control={<StyledRadio />} label={choice} />))}
+        <FormControl component="fieldset" style={{width: '100%'}}>
+            <FormLabel style={{marginBottom: '20px', textAlign: 'left'}}
+                       component="legend"><strong>{props.q.id + 1} : </strong>{props.q.description}</FormLabel>
+            <RadioGroup defaultValue={0} aria-label="gender" name={props.q.id + '_name'}>
+                {props.q.choices.map(((choice, index) => <FormControlLabel key={index} value={index + ''}
+                                                                           control={<StyledRadio
+                                                                               onChange={() => console.log(props.q['answer'] = index)}/>}
+                                                                           label={choice}/>))}
             </RadioGroup>
 
-            <Button onClick={props.prev} style={{marginTop: '30px'}} variant="contained" color="success">
-                Previous
-            </Button>
-            <Button onClick={props.next} style={{marginTop: '30px'}} variant="contained" color="primary">
-                Next
-            </Button>
+            <Toolbar style={{float: 'right', display: 'block'}}>
+                <Button onClick={props.prev} style={{margin: '30px 10px 0 0', minWidth: '120px'}} variant="contained" color="secondary">
+                    Previous
+                </Button>
+                <Button onClick={props.next} style={{marginTop: '30px', minWidth: '120px'}} variant="contained" color="primary">
+                    {props.q.id < 9 ? 'Next' : 'Submit'}
+                </Button>
+            </Toolbar>
+
         </FormControl>
     );
 }
