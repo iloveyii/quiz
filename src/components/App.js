@@ -13,6 +13,7 @@ import Model from './Model';
 
 import '../App.css';
 
+const MCQS_COUNT = 10;
 
 const styles = theme => ({
     root: {
@@ -65,8 +66,24 @@ class App extends React.Component {
         console.log('App');
         this.setQuestionId = this.setQuestionId.bind(this);
         const questions = [];
+        const randomMcqs = this.getRandomQuestions(mcqs, MCQS_COUNT);
         mcqs.map( mcq => questions.push(new Model(mcq)));
         this.state = {questions: questions, questionId: 0};
+    }
+
+    getRandomQuestions(mcqs, MCQS_COUNT) {
+        const keysMCQS = Object.keys(mcqs);
+        const randomKeys = [];
+
+        for(let i =0; i< MCQS_COUNT; i++) {
+            const randomKey = Math.floor(Math.random() * keysMCQS.length);
+            randomKeys.push(keysMCQS[randomKey]);
+            keysMCQS.splice( keysMCQS.indexOf(keysMCQS[randomKey]), 1 );
+        }
+        randomKeys.sort();
+        const randomMCQS = [];
+        randomKeys.forEach( key => randomMCQS.push(mcqs[key]));
+        return randomMCQS;
     }
 
     setQuestionId(id) {
