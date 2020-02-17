@@ -75,7 +75,7 @@ export default function Question(props) {
                        component="legend"><strong>{props.q.id + 1} : </strong>{props.q.description}</FormLabel>
             <RadioGroup defaultValue={props.q.answer + ''} aria-label="gender"
                         name={props.q.id + '_name'}>
-                {props.q.choices.map(((choice, index) => <FormControlLabel key={index} value={index + ''}
+                {props.q.choices.map(((choice, index) => <FormControlLabel style={{textAlign: 'left'}} key={index} value={index + ''}
                                                                            control={<StyledRadio
                                                                                onChange={() => props.q.setAnswer(index)}/>}
                                                                            label={choice}/>))}

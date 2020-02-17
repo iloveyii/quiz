@@ -8,6 +8,12 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Quiz from "./App";
+import Paper from '@material-ui/core/Paper';
+import Link from '@material-ui/core/Link';
+
+
 
 
 const useStyles = makeStyles({
@@ -87,14 +93,24 @@ export default function Result(props) {
 
     const {correct, wrong} = calculateResults();
     return (
-        <FormControl component="fieldset" style={{width: '100%'}}>
-            <FormLabel style={{marginBottom: '20px', textAlign: 'left'}}
-                       component="legend"><strong>RESULT </strong></FormLabel>
+        <Paper style={{padding: '100px'}}>
+            <Typography variant="h3" component="h3" gutterBottom color='primary'>
+                Result
+            </Typography>
 
-            <FormLabel style={{marginBottom: '20px', textAlign: 'left'}}
-                       component="legend"><strong>Correct </strong>{correct}</FormLabel>
-            <FormLabel style={{marginBottom: '20px', textAlign: 'left'}}
-                       component="legend"><strong>Wrong </strong>{wrong}</FormLabel>
-        </FormControl>
+            <Typography variant="h5" component="h3" gutterBottom color='secondary'>
+                Correct: {correct}
+            </Typography>
+
+            <Typography variant="h5" component="h3" gutterBottom color='secondary'>
+                Wrong: {wrong}
+            </Typography>
+
+            <Button onClick={() => window.location.reload(false)} style={{margin: '30px 10px 0 0', minWidth: '120px'}} variant="contained"
+                    color="secondary">
+                Retake Quiz
+            </Button>
+
+        </Paper>
     );
 }

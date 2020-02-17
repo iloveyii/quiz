@@ -3,10 +3,15 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import {withStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import ParticlesBg from "particles-bg";
-import QuestionsTabs from "./QuestionsTabs";
+import Quiz from "./Quiz";
 import Copyright from './Copyright';
 import mcqs from '../mocks';
 import Model from './Model';
@@ -53,6 +58,8 @@ const styles = theme => ({
     footer: {
         padding: theme.spacing(3, 2),
         marginTop: 'auto',
+        textAlign: 'center',
+        width: '100%',
         backgroundColor:
             theme.palette.type === 'dark' ? theme.palette.grey[800] : theme.palette.grey[200],
     },
@@ -95,6 +102,16 @@ class App extends React.Component {
 
         return (
             <div className={classes.root}>
+                <AppBar position="static">
+                    <Toolbar>
+                        <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography variant="h6" className={classes.title}>
+                            QUIZ
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
                 <CssBaseline/>
 
                 <Container component="main" className={classes.main} maxWidth="xl">
@@ -110,7 +127,7 @@ class App extends React.Component {
                     <Grid container spacing={3} className={classes.grid}>
                         <Grid item xs={12} sm={6}>
                             <Paper className={classes.paper}>
-                                <QuestionsTabs questions={this.state.questions} />
+                                <Quiz questions={this.state.questions} />
                             </Paper>
                         </Grid>
                     </Grid>
