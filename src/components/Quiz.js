@@ -98,7 +98,7 @@ export default function Quiz(props) {
                             {
                                 props.questions.map((q, index) => <TabPanel key={q.id} value={questionId} index={index}
                                                                             dir={theme.direction}>
-                                    <Question index={index} key={index} prev={() => handleChangeIndex(index - 1)}
+                                    <Question index={index} key={index} prev={() => handleChangeIndex( index===0 ? 0 : index - 1)}
                                               next={() => handleChangeIndex(index + 1)} q={q}/>
                                 </TabPanel>)
                             }
