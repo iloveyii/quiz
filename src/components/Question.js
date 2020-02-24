@@ -8,7 +8,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
-import Result from './Result';
+import {MCQS_COUNT} from './settings'
 
 
 const useStyles = makeStyles({
@@ -68,11 +68,10 @@ function StyledRadio(props) {
 }
 
 export default function Question(props) {
-                console.log('Question props', props);
     return (
         <FormControl component="fieldset" style={{width: '100%'}}>
             <FormLabel style={{marginBottom: '20px', textAlign: 'left'}}
-                       component="legend"><strong>{props.q.id + 1} : </strong>{props.q.description}</FormLabel>
+                       component="legend"><strong>{props.index + 1} : </strong>{props.q.description}</FormLabel>
             <RadioGroup defaultValue={props.q.answer + ''} aria-label="gender"
                         name={props.q.id + '_name'}>
                 {props.q.choices.map(((choice, index) => <FormControlLabel style={{textAlign: 'left'}} key={index} value={index + ''}
@@ -88,7 +87,7 @@ export default function Question(props) {
                 </Button>
                 <Button onClick={props.next} style={{marginTop: '30px', minWidth: '120px'}} variant="contained"
                         color="primary">
-                    {props.q.id < 9 ? 'Next' : 'Submit'}
+                    {props.index < MCQS_COUNT - 1 ? 'Next' : 'Submit'}
                 </Button>
             </Toolbar>
 

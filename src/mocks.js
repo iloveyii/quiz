@@ -59,6 +59,48 @@ const mcqs = [
         description: 'What does the <noscript> tag do?',
         choices: ['Enclose text to be displayed by non-JavaScript browsers.', ' Prevents scripts on the page from executing.', ' Describes certain low-budget movies.', 'None of the above']
     },
+    {
+        id: 10,
+        correct: 3,
+        description: 'Question is ...',
+        choices: ['Option 1', 'Option 2', 'Option 3', 'None of the above']
+    },
+    {
+        id: 11,
+        correct: 3,
+        description: 'Question is ...',
+        choices: ['Option 1', 'Option 2', 'Option 3', 'None of the above']
+    },
+    {
+        id: 12,
+        correct: 3,
+        description: 'Question is ...',
+        choices: ['Option 1', 'Option 2', 'Option 3', 'None of the above']
+    },
+    {
+        id: 13,
+        correct: 3,
+        description: 'Question is ...',
+        choices: ['Option 1', 'Option 2', 'Option 3', 'None of the above']
+    },
+    {
+        id: 14,
+        correct: 3,
+        description: 'Question is ...',
+        choices: ['Option 1', 'Option 2', 'Option 3', 'None of the above']
+    },
+    {
+        id: 15,
+        correct: 3,
+        description: 'Question is ...',
+        choices: ['Option 1', 'Option 2', 'Option 3', 'None of the above']
+    },
+    {
+        id: 16,
+        correct: 3,
+        description: 'Question is ...',
+        choices: ['Option 1', 'Option 2', 'Option 3', 'None of the above']
+    },
 ];
 
 

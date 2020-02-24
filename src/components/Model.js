@@ -1,5 +1,3 @@
-import mcqs from '../mocks';
-
 
 class Model {
     constructor(mcq) {

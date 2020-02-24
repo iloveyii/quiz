@@ -76,7 +76,6 @@ function StyledRadio(props) {
 export default function Result(props) {
 
     const calculateResults = () => {
-        console.log('Results: ', props.questions);
         let correct = 0; let wrong = 0;
         for(let i = 0; i < props.questions.length; i++) {
             const q = props.questions[i];
@@ -84,10 +83,8 @@ export default function Result(props) {
                 correct++;
             } else {
                 wrong++;
-                console.log(q.correct, q.answer)
             }
         }
-        console.log('Correct, wrong', correct, wrong);
         return {correct, wrong};
     };
 
