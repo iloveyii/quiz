@@ -2,7 +2,7 @@ QUIZ
 ====
 This is a single page Quiz game. It offers 10 random questions.
 
-![Screenshot]()
+![Screenshot](https://github.com/iloveyii/quiz/blob/master/public/screenshot.png)
 
 ## Installation
    * Clone the repo as `git clone https://github.com/iloveyii/quiz.git`
