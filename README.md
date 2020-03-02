@@ -2,6 +2,8 @@ QUIZ
 ====
 This is a single page Quiz game. It offers 10 random questions.
 
+![Screenshot]()
+
 ## Installation
    * Clone the repo as `git clone https://github.com/iloveyii/quiz.git`
    * Run npm install `ǹpm install`
