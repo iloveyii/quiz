@@ -27,3 +27,5 @@ This is a single page Quiz game. It offers 10 random questions.
   * Connect to a database of questions 
   * Develop a small backend in Node Js
   * Write more test cases
+  * Add life lines etc
+  * Implement further functional points in doc
